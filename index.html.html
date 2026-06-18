@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Father's Day Celebration</title>
+  <style>
+.letter {
+  display: none;
+  max-height: 70vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #fdf5e6; /* parchment */
+  color: #3D2B1F;
+  font-family: 'Georgia', serif;
+  border: 2px solid #c19a6b;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  margin: 0 auto;       /* centers horizontally */
+  width: 80%;           /* leaves space on sides */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+}
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #A8D5BA, #6FAE75, #3D6B47);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .screen {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+    .active {
+      display: flex;
+    }
+    button {
+      background: #fff;
+      color: #3D6B47;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #f0f0f0;
+    }
+    .fadeOut {
+      animation: fadeOut 1s forwards;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+    .fadeIn {
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .scroll-box, .letter {
+      max-height: 70vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+    }
+    .teddy {
+      font-size: 80px;
+    }
+    /* Vintage envelope */
+    .envelope {
+      width: 220px;
+      height: 140px;
+      background: #d2b48c; /* tan parchment color */
+      border: 2px solid #8b5e3c;
+      border-radius: 6px;
+      position: relative;
+      cursor: pointer;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    .envelope:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-width: 70px 110px 0 110px;
+      border-style: solid;
+      border-color: #c19a6b transparent transparent transparent;
+    }
+    /* Vintage letter */
+    .letter {
+      display: none;
+      background: #fdf5e6; /* parchment */
+      color: #3D2B1F;
+      font-family: 'Georgia', serif;
+      border: 2px solid #c19a6b;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+/* Floating leaves and flowers with randomized animations */
+.leaf, .flower {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.8;
+  animation: floatUp 12s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) rotate(0deg) scale(1); opacity: 0; }
+  20% { opacity: 1; }
+  50% { transform: translateY(50vh) rotate(180deg) scale(1.2); }
+  80% { opacity: 0.7; }
+  100% { transform: translateY(-10vh) rotate(360deg) scale(1); opacity: 0; }
+}
+
+/* Fun drastic wiggle animation */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-15deg); }
+  75% { transform: rotate(10deg); }
+}
+
+/* Apply wiggle randomly */
+.wiggle {
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+
+  </style>
+</head>
+<body>
+<!-- Sound effects -->
+<audio id="confettiSound" src="confetti.mp3" preload="auto"></audio>
+<audio id="envelopeSound" src="envelope.mp3" preload="auto"></audio>
+<audio id="buttonSound" src="button.mp3" preload="auto"></audio>
+
+<!-- Floating background elements -->
+<div class="leaf" style="left:5%; animation-delay: 0s;">🍃</div>
+<div class="flower wiggle" style="left:15%; animation-delay: 2s;">🌸</div>
+<div class="leaf" style="left:25%; animation-delay: 4s;">🍂</div>
+<div class="flower" style="left:35%; animation-delay: 6s;">🌼</div>
+<div class="leaf wiggle" style="left:45%; animation-delay: 1s;">🌿</div>
+<div class="flower" style="left:55%; animation-delay: 3s;">🌺</div>
+<div class="leaf" style="left:65%; animation-delay: 5s;">🍁</div>
+<div class="flower wiggle" style="left:75%; animation-delay: 7s;">💮</div>
+<div class="leaf" style="left:85%; animation-delay: 2s;">🍀</div>
+<div class="flower" style="left:95%; animation-delay: 4s;">🌻</div>
+
+  <!-- Screen 1 -->
+  <div class="screen active" id="screen1">
+    <h1>Happy Father's Day 🌿</h1>
+    <button id="celebrateBtn">Celebrate 🎉</button>
+    <p id="counter">Celebrate 17 years of fatherhood</p>
+  </div>
+
+  <!-- Screen 2 -->
+  <div class="screen" id="screen2">
+    <div class="teddy">🧸</div>
+    <h2>We love our superhero 🦸‍♂️</h2>
+    <div class="scroll-box">
+      <h3>50 Reasons Why We Love You, Dad ❤️</h3>
+      <ol>
+  <li>You make our house feel like home.</li>
+  <li>You always know how to make us laugh.</li>
+  <li>You never fail to cheer us on.</li>
+  <li>You teach us lessons that no textbook can.</li>
+  <li>You make us feel safe wherever we are.</li>
+  <li>You work tirelessly for our family.</li>
+  <li>You celebrate our victories as if they were your own.</li>
+  <li>You help us find solutions instead of dwelling on problems.</li>
+  <li>You are the first person we turn to for advice.</li>
+  <li>You remind us that mistakes are part of learning.</li>
+  <li>You make even ordinary days memorable.</li>
+  <li>You have the best stories to tell.</li>
+  <li>You show us what integrity looks like.</li>
+  <li>You always keep your promises.</li>
+  <li>You encourage us to think for ourselves.</li>
+  <li>You never stop learning, and that inspires us.</li>
+  <li>You teach us the importance of perseverance.</li>
+  <li>You treat people with kindness and respect.</li>
+  <li>You are our biggest role model.</li>
+  <li>You make sacrifices without expecting anything in return.</li>
+  <li>You believe in us even when we doubt ourselves.</li>
+  <li>You know exactly when we need a hug.</li>
+  <li>You turn challenges into opportunities.</li>
+  <li>You make family your top priority.</li>
+  <li>You have a way of making everything seem possible.</li>
+  <li>You are always willing to lend a helping hand.</li>
+  <li>You make us feel heard and understood.</li>
+  <li>You teach us to stay humble.</li>
+  <li>You encourage us to be confident.</li>
+  <li>You show us the value of hard work.</li>
+  <li>You remind us to stay true to ourselves.</li>
+  <li>You never let us give up too easily.</li>
+  <li>You have the patience to guide us through difficult moments.</li>
+  <li>You inspire us through your actions, not just your words.</li>
+  <li>You make us proud every day.</li>
+  <li>You teach us the importance of responsibility.</li>
+  <li>You always know how to lift our spirits.</li>
+  <li>You make family gatherings more fun.</li>
+  <li>You teach us to be brave when facing challenges.</li>
+  <li>You remind us to appreciate the little things in life.</li>
+  <li>You make us feel loved without having to say a word.</li>
+  <li>You support our ambitions and dreams.</li>
+  <li>You teach us to stand up for what is right.</li>
+  <li>You bring calm during stressful times.</li>
+  <li>You make us feel special in your own unique way.</li>
+  <li>You are the strongest person we know.</li>
+  <li>You show us what unconditional love looks like.</li>
+  <li>You help us become better versions of ourselves.</li>
+  <li>You are the heart of so many of our happiest memories.</li>
+  <li>Simply because you're you, and we couldn't imagine life without you.</li>
+</ol>
+<p>Love, Your Two Fav financial burdens 💙</p>
+
+    </div>
+    <button id="alsoBtn">alsooo...</button>
+  </div>
+
+  <!-- Screen 3 -->
+  <div class="screen" id="screen3">
+    <div class="envelope" id="envelope"></div>
+    <div class="letter" id="letter">
+      <h3>Dear Dad,</h3>
+       <p>Happy Father's Day to the best dad ever.</p>
+       <p>No words are enough to tell you how much you mean to us. Whenever life gets a little difficult or we're confused about what to do, you're always the person we look up to.</p>
+<p>Despite the childhood you had, you made sure that we had one worth flexing about. You gave us so many experiences, so much fun, and so much exposure. Even when things got difficult, you never let us feel it. You made sure we got the best education, went on amazing trips, ate the best food, watched the best movies, and had opportunities that many people only dream of. We don't think we'll ever be able to thank you enough for that.</p>
+<p>One thing we've always admired about you is that no matter what life threw at you, you never gave up. And that's exactly what you've taught us too. To keep going, no matter how hard things get.</p>
+<p>We hope that one day we become the kind of people you can proudly point to and say, "Ye hain meri betiyan," to everyone who ever doubted you or looked down on you. We want to be your biggest achievement.</p>
+<p>Thank you for not being like other parents. Thank you for trusting us, understanding us, and loving us so much. Thank you for never being like everyone else. Thank you for loving us so fiercely and unconditionally. Thank you for setting our standards so high that we know our worth and never settle for less than we deserve. Most importantly, thank you for simply being you.</p>
+<p>Most of all, thank you for being you.</p>
+<p>Thank you for every trip, every tasty meal, every movie night, every life lesson, every sacrifice, and every memory. Thank you for working so hard so that we could have a life full of opportunities and happiness.</p>
+<p>We might not say it often, but we notice everything, and we appreciate everything.</p>
+<p>And Dad, we promise you this: one day, we will make you proud.</p>
+<p>We love you to Pluto and back.</p>
+<p>Love, Your daughters ❤️</p>
+
+    </div>
+    <button id="loveBtn" style="display:none;">I love you too 💕</button>
+  </div>
+
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    function fireConfetti() {
+      const duration = 1 * 1000;
+      const end = Date.now() + duration;
+      (function frame() {
+        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      }());
+    }
+
+    let clicks = 0;
+    const btn = document.getElementById("celebrateBtn");
+
+    btn.addEventListener("click", () => {
+      clicks++;
+      fireConfetti();
+      if(clicks >= 17){
+        const s1 = document.getElementById("screen1");
+        s1.classList.add("fadeOut");
+        setTimeout(() => {
+          s1.classList.remove("active");
+          const s2 = document.getElementById("screen2");
+          s2.classList.add("active","fadeIn");
+        }, 1000);
+      }
+    });
+
+    document.getElementById("alsoBtn").addEventListener("click", () => {
+      const s2 = document.getElementById("screen2");
+      s2.classList.add("fadeOut");
+      setTimeout(() => {
+        s2.classList.remove("active");
+        const s3 = document.getElementById("screen3");
+        s3.classList.add("active","fadeIn");
+      }, 1000);
+    });
+
+    document.getElementById("envelope").addEventListener("click", () => {
+      const env = document.getElementById("envelope");
+      env.style.display = "none"; // envelope disappears
+      const letter = document.getElementById("letter");
+      letter.style.display = "block";
+      document.getElementById("loveBtn").style.display = "inline-block";
+    });
+
+    document.getElementById("loveBtn").addEventListener("click", () => {
+      fireConfetti();
+    });
+  </script>
+</body>
+</html>
